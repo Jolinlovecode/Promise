@@ -18,7 +18,9 @@ However:
 const doShortlyExpectingTruthy = function(callback, delay, data) {
   return new Promise((resolve, reject) => {
     setTimeout(()=> {
-      resolve(callback(data));
+      if (callback(data)) {
+        resolve(callback(data));
+      }
       reject('Falsy value retrieved');
     }, delay);
   });
